@@ -1,0 +1,89 @@
+<!--
+  <div>
+    <label>Nombre del lugar:</label>
+    <input type="text" [(ngModel)]="nuevoLugar.nombreLugar">
+  </div>
+  <div>
+    <label>Ubicación:</label>
+    <input type="text" [(ngModel)]="nuevoLugar.ubicacion">
+  </div>
+  <div>
+    <label>Trabajo:</label>
+    <input type="text" [(ngModel)]="nuevoLugar.trabajo">
+  </div>
+  <div>
+    <label>contacto Persona:</label>
+    <input type="text" [(ngModel)]="nuevoLugar.contactoPersona">
+  </div>
+  <div>
+    <label>Celular:</label>
+    <input type="text" [(ngModel)]="nuevoLugar.celular">
+  </div>
+  <div>
+    <label>Horas:</label>
+    <input type="text" [(ngModel)]="nuevoLugar.horas">
+  </div>
+  <div>
+    <label>Observación:</label>
+    <input type="text" [(ngModel)]="nuevoLugar.observacion">
+  </div>
+  -->
+
+  <div class="center">
+    <button (click)="agregarLugar()">Agregar</button>
+  </div>
+  
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre Lugar</th>
+        <th>Ubicación</th>
+        <th>Trabajo</th>
+        <th>Contacto Persona</th>
+        <th>Celular</th>
+        <th>Horas</th>
+        <th>Observación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lugar of lugares; let i = index">
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{lugar.nombreLugar}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="lugares[i].nombreLugar">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{lugar.ubicacion}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="lugares[i].ubicacion">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{lugar.trabajo}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="lugares[i].trabajo">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{lugar.contactoPersona}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="lugares[i].contactoPersona">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{lugar.celular}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="lugares[i].celular">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{lugar.horas}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="lugares[i].horas">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{lugar.observacion}}</span>
+          <input *ngIf="indiceEdicion === i" type="number" [(ngModel)]="lugares[i].observacion">
+        </td>
+        <td>
+          <button *ngIf="indiceEdicion !== i" (click)="editarLugar(i)">Editar</button>
+          <button *ngIf="indiceEdicion === i" (click)="guardarEdicion()">Guardar</button>
+          <button (click)="eliminarLugar(i)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+</table>
+  

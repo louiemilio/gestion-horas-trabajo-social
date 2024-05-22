@@ -1,0 +1,86 @@
+<!--
+<div>
+    <label>Nombre:</label>
+    <input type="text" [(ngModel)]="nuevaOferta.nombre">
+  </div>
+  <div>
+    <label>Ubicación:</label>
+    <input type="text" [(ngModel)]="nuevaOferta.ubicacion">
+  </div>
+  <div>
+    <label>Nombre del Estudiante:</label>
+    <input type="text" [(ngModel)]="nuevaOferta.nombreEstudiante">
+  </div>
+  <div>
+    <label>Celular:</label>
+    <input type="text" [(ngModel)]="nuevaOferta.celular">
+  </div>
+  <div>
+    <label>Horas inicial:</label>
+    <input type="text" [(ngModel)]="nuevaOferta.horasInicial">
+  </div>
+  <div>
+    <label>Horas Final:</label>
+    <input type="text" [(ngModel)]="nuevaOferta.horasFinal">
+  </div>
+  <div>
+    <label>Observación:</label>
+    <input type="text" [(ngModel)]="nuevaOferta.observacion">
+  </div>
+  
+-->
+<div class="center">
+  <button (click)="agregarOferta()">Agregar</button>
+</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Ubicación</th>
+        <th>Nombre del estudiante</th>
+        <th>Celular</th>
+        <th>Horas inicial</th>
+        <th>Horas final</th>
+        <th>Observación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Oferta of ofertas; let i = index">
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{Oferta.nombre}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].nombre">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{Oferta.ubicacion}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].ubicacion">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{Oferta.nombreEstudiante}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].nombreEstudiante">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{Oferta.celular}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].celular">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{Oferta.horasInicial}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].horasInicial">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{Oferta.horasFinal}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].horasFinal">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{Oferta.observacion}}</span>
+          <input *ngIf="indiceEdicion === i" type="number" [(ngModel)]="ofertas[i].observacion">
+        </td>
+        <td>
+          <button *ngIf="indiceEdicion !== i" (click)="editarOferta(i)">Editar</button>
+          <button *ngIf="indiceEdicion === i" (click)="guardarEdicion()">Guardar</button>
+          <button (click)="eliminarOferta(i)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+</table>

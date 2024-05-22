@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    background-color:rgb(41, 41, 41);
+}
+
+h1, h2, h3 {
+    font-size: 50px;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+}
+
+hr {
+    border-color: white;
+    padding-top: 20px;
+    background: rgb(41, 41, 41);
+    background: linear-gradient(90deg, rgb(41, 41, 41) 0%, rgb(68, 68, 68) 50%, rgb(41, 41, 41) 100%);
+}

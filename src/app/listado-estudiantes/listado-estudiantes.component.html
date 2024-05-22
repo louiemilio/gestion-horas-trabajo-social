@@ -1,0 +1,124 @@
+  <!--
+  <div>
+    <label>Nombre Completo:</label>
+    <input type="text" [(ngModel)]="nuevoEstudiante.nombreCompleto">
+  </div>
+  <div>
+    <label>Cédula:</label>
+    <input type="text" [(ngModel)]="nuevoEstudiante.cedula">
+  </div>
+  <div>
+    <label>Correo:</label>
+    <input type="text" [(ngModel)]="nuevoEstudiante.correo">
+  </div>
+  <div>
+    <label>Celular:</label>
+    <input type="text" [(ngModel)]="nuevoEstudiante.celular">
+  </div>
+  <div>
+    <label>Lugar de Residencia:</label>
+    <input type="text" [(ngModel)]="nuevoEstudiante.lugarResidencia">
+  </div>
+  <div>
+    <label>Carrera:</label>
+    <input type="text" [(ngModel)]="nuevoEstudiante.carrera">
+  </div>
+  <div>
+    <label>Año de Estudio:</label>
+    <input type="number" [(ngModel)]="nuevoEstudiante.anoEstudio">
+  </div>
+  <div>
+    <label>Grupo Actual:</label>
+    <input type="text" [(ngModel)]="nuevoEstudiante.grupoActual">
+  </div>
+  <div>
+    <label>Horas:</label>
+    <input type="number" [(ngModel)]="nuevoEstudiante.horas">
+  </div>
+  <div>
+    <label>Empresa:</label>
+    <input type="text" [(ngModel)]="nuevoEstudiante.empresa">
+  </div>
+  <div>
+    <label>Observación:</label>
+    <input type="text" [(ngModel)]="nuevoEstudiante.observacion">
+  </div>
+-->
+<div class="center">
+  <button (click)="agregarEstudiante()">Agregar</button>
+</div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre Completo</th>
+        <th>Cédula</th>
+        <th>Correo</th>
+        <th>Celular</th>
+        <th>Lugar de Residencia</th>
+        <th>Carrera</th>
+        <th>Año de Estudio</th>
+        <th>Grupo Actual</th>
+        <th>Horas</th>
+        <th>Empresa</th>
+        <th>Observación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let estudiante of estudiantes; let i = index">
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{estudiante.nombreCompleto}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="estudiantes[i].nombreCompleto">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{estudiante.cedula}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="estudiantes[i].cedula">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{estudiante.correo}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="estudiantes[i].correo">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{estudiante.celular}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="estudiantes[i].celular">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{estudiante.lugarResidencia}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="estudiantes[i].lugarResidencia">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{estudiante.carrera}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="estudiantes[i].carrera">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{estudiante.anoEstudio}}</span>
+          <input *ngIf="indiceEdicion === i" type="number" [(ngModel)]="estudiantes[i].anoEstudio">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{estudiante.grupoActual}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="estudiantes[i].grupoActual">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{estudiante.horas}}</span>
+          <input *ngIf="indiceEdicion === i" type="number" [(ngModel)]="estudiantes[i].horas">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{estudiante.empresa}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="estudiantes[i].empresa">
+        </td>
+        <td>
+          <span *ngIf="indiceEdicion !== i">{{estudiante.observacion}}</span>
+          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="estudiantes[i].observacion">
+        </td>
+        <td>
+          <button *ngIf="indiceEdicion !== i" (click)="editarEstudiante(i)">Editar</button>
+          <button *ngIf="indiceEdicion === i" (click)="guardarEdicion()">Guardar</button>
+          <button (click)="eliminarEstudiante(i)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+
+
