@@ -1,56 +1,36 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-interface Estudiante {
-  nombreCompleto: string;
-  cedula: string;
-  correo: string;
-  celular: string;
-  lugarResidencia: string;
-  carrera: string;
-  anoEstudio: number;
-  grupoActual: string;
-  horas: number;
-  empresa: string;
-  observacion: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { EstudianteService } from '../services/estudiante.service'; 
+import { estudianteModel } from '../shared/estudiantes.model'; 
+
+
 
 @Component({
   selector: 'app-listado-estudiantes',
   templateUrl: './listado-estudiantes.component.html',
   styleUrls: ['./listado-estudiantes.component.css']
 })
-export class ListadoEstudiantesComponent {
-  estudiantes: Estudiante[] = [];
-  nuevoEstudiante: Estudiante = {
-    nombreCompleto: '',
-    cedula: '',
-    correo: '',
-    celular: '',
-    lugarResidencia: '',
-    carrera: '',
-    anoEstudio: 0,
-    grupoActual: '',
-    horas: 0,
-    empresa: '',
-    observacion: ''
-};
+export class ListadoEstudiantesComponent implements OnInit {
+  estudiantes: estudianteModel[] = [];
+  nuevoEstudiante: estudianteModel = new estudianteModel('', '', '', '', '', '', 0, '', 0, '', '', '');
   indiceEdicion: number | null = null;
 
+  constructor(private estudianteService: EstudianteService) {}
+
+  ngOnInit() {
+    this.obtenerEstudiantes();
+  }
+
+  obtenerEstudiantes() {
+    this.estudianteService.obtenerEstudiantes().subscribe(estudiantes => {
+      this.estudiantes = estudiantes;
+    });
+  }
+
   agregarEstudiante() {
-    this.estudiantes.push({...this.nuevoEstudiante});
-    this.nuevoEstudiante = {
-      nombreCompleto: '',
-      cedula: '',
-      correo: '',
-      celular: '',
-      lugarResidencia: '',
-      carrera: '',
-      anoEstudio: 0,
-      grupoActual: '',
-      horas: 0,
-      empresa: '',
-      observacion: ''
-    };
+    this.estudianteService.agregarEstudiante(this.nuevoEstudiante).subscribe(response => {
+      this.obtenerEstudiantes();
+      this.nuevoEstudiante = new estudianteModel('', '', '', '', '', '', 0, '', 0, '', '', '');
+    });
   }
 
   editarEstudiante(index: number) {
@@ -59,12 +39,18 @@ export class ListadoEstudiantesComponent {
 
   guardarEdicion() {
     if (this.indiceEdicion !== null) {
-      this.estudiantes[this.indiceEdicion] = {...this.estudiantes[this.indiceEdicion]};
-      this.indiceEdicion = null;
+      const estudianteEditado = this.estudiantes[this.indiceEdicion];
+      this.estudianteService.actualizarEstudiante(estudianteEditado).subscribe(response => {
+        this.obtenerEstudiantes();
+        this.indiceEdicion = null;
+      });
     }
   }
 
   eliminarEstudiante(index: number) {
-    this.estudiantes.splice(index, 1);
+    const estudianteId = this.estudiantes[index].id;
+    this.estudianteService.borrarEstudiante(estudianteId).subscribe(response => {
+      this.obtenerEstudiantes();
+    });
   }
 }

@@ -1,45 +1,44 @@
-import { Component } from '@angular/core';
-
-interface Lugar {
-  nombreLugar: string;
-  ubicacion: string;
-  trabajo: string;
-  contactoPersona: string;
-  celular: string;
-  horas: number;
-  observacion: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { LugaresTrabajadosService } from '../services/lugares-trabajados.service';
+import { lugaresTrabajadosModel } from '../shared/lugaresTrabajados.models';
 
 @Component({
   selector: 'app-listado-lugares',
   templateUrl: './listado-lugares.component.html',
   styleUrls: ['./listado-lugares.component.css']
 })
-export class ListadoLugaresComponent {
-    lugares: Lugar[] = [];
-    nuevoLugar: Lugar = {
-    nombreLugar: '',
-    ubicacion: '',
-    trabajo: '',
-    contactoPersona: '',
-    celular: '',
-    horas: 0,
-    observacion: '',
-};
+export class ListadoLugaresComponent implements OnInit {
+  lugares: lugaresTrabajadosModel[] = [];
+  nuevoLugar: lugaresTrabajadosModel = new lugaresTrabajadosModel('', '', '', '', '', 0);
+  indiceEdicion: number | null = null;
 
-indiceEdicion: number | null = null;
+  constructor(private lugaresService: LugaresTrabajadosService) {}
+
+  ngOnInit() {
+    this.obtenerLugares();
+  }
+
+  obtenerLugares() {
+    this.lugaresService.obtenerLugares().subscribe({
+      next: (lugares) => {
+        this.lugares = lugares;
+      },
+      error: (error) => {
+        console.error('Error al obtener los lugares:', error);
+      }
+    });
+  }
 
   agregarLugar() {
-    this.lugares.push({...this.nuevoLugar});
-    this.nuevoLugar = {
-      nombreLugar: '',
-      ubicacion: '',
-      trabajo: '',
-      contactoPersona: '',
-      celular: '',
-      horas: 0,
-      observacion: '',
-    };
+    this.lugaresService.agregarLugar(this.nuevoLugar).subscribe({
+      next: () => {
+        this.obtenerLugares(); // Refresca la lista después de agregar un lugar
+        this.nuevoLugar = new lugaresTrabajadosModel('', '', '', '', '', 0);
+      },
+      error: (error) => {
+        console.error('Error al agregar el lugar:', error);
+      }
+    });
   }
 
   editarLugar(index: number) {
@@ -48,12 +47,28 @@ indiceEdicion: number | null = null;
 
   guardarEdicion() {
     if (this.indiceEdicion !== null) {
-      this.lugares[this.indiceEdicion] = {...this.lugares[this.indiceEdicion]};
-      this.indiceEdicion = null;
+      const lugarActualizado = this.lugares[this.indiceEdicion];
+      this.lugaresService.actualizarLugar(lugarActualizado.id, lugarActualizado).subscribe({
+        next: () => {
+          this.indiceEdicion = null;
+          this.obtenerLugares();
+        },
+        error: (error) => {
+          console.error('Error al actualizar el lugar:', error);
+        }
+      });
     }
   }
 
   eliminarLugar(index: number) {
-    this.lugares.splice(index, 1);
+    const lugarId = this.lugares[index].id;
+    this.lugaresService.borrarLugar(lugarId).subscribe({
+      next: () => {
+        this.obtenerLugares();
+      },
+      error: (error) => {
+        console.error('Error al eliminar el lugar:', error);
+      }
+    });
   }
 }
