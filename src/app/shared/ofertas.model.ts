@@ -5,8 +5,8 @@ export class ofertasModel {
     public ubicacion: string,
     public nombre_estudiante: string,
     public celular: string,
-    public horas_inicial: string,
-    public horas_final: string,
+    public horas_inicial: number,
+    public horas_final: number,
     public observaciones: string
   ) {}
 }

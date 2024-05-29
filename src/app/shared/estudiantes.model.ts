@@ -11,6 +11,5 @@ export class estudianteModel {
     public horas_trabajadas: number,
     public empresa: string,
     public observacion: string,
-    public acciones: string
   ) {}
 }

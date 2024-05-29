@@ -9,7 +9,7 @@ import { ofertasModel } from '../shared/ofertas.model';
 })
 export class ListadoOfertasComponent implements OnInit {
   ofertas: ofertasModel[] = [];
-  nuevaOferta: ofertasModel = new ofertasModel('', '', '', '', '', '', '', '');
+  nuevaOferta: ofertasModel = new ofertasModel('', '', '', '', '', 0, 0, '');
   indiceEdicion: number | null = null;
 
   constructor(private ofertasService: OfertasService) {}
@@ -33,7 +33,7 @@ export class ListadoOfertasComponent implements OnInit {
     this.ofertasService.agregarOferta(this.nuevaOferta).subscribe({
       next: () => {
         this.obtenerOfertas();
-        this.nuevaOferta = new ofertasModel('', '', '', '', '', '', '', '');
+        this.nuevaOferta = new ofertasModel('', '', '', '', '', 0, 0, '');
       },
       error: (error) => {
         console.error('Error al agregar la oferta:', error);

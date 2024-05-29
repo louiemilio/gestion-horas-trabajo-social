@@ -11,7 +11,7 @@ import { estudianteModel } from '../shared/estudiantes.model';
 })
 export class ListadoEstudiantesComponent implements OnInit {
   estudiantes: estudianteModel[] = [];
-  nuevoEstudiante: estudianteModel = new estudianteModel('', '', '', '', '', '', 0, '', 0, '', '', '');
+  nuevoEstudiante: estudianteModel = new estudianteModel('', '', '', '', '', '', 0, '', 0, '', '');
   indiceEdicion: number | null = null;
 
   constructor(private estudianteService: EstudianteService) {}
@@ -29,7 +29,7 @@ export class ListadoEstudiantesComponent implements OnInit {
   agregarEstudiante() {
     this.estudianteService.agregarEstudiante(this.nuevoEstudiante).subscribe(response => {
       this.obtenerEstudiantes();
-      this.nuevoEstudiante = new estudianteModel('', '', '', '', '', '', 0, '', 0, '', '', '');
+      this.nuevoEstudiante = new estudianteModel('', '', '', '', '', '', 0, '', 0, '', '');
     });
   }
 
