@@ -7,6 +7,7 @@ const app = express();
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "*");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 app.use(bodyParser.json());
@@ -77,7 +78,7 @@ app.post("/listado_estudiantes/agregar", (req, res) => {
   };
 
   const query = `INSERT INTO listado_estudiantes SET ?`;
-  conexion.query(query, usuario, (error, resultado) => {
+  conexion.query(query, listado_estudiantes, (error, resultado) => {
     if (error) return console.error(error.message);
 
     res.json(`Se insertó correctamente el estudiante`);

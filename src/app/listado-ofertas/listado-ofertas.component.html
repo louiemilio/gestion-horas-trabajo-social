@@ -1,56 +1,55 @@
-
 <div class="center">
   <button (click)="agregarOferta()">Agregar</button>
 </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Ubicación</th>
-        <th>Nombre del estudiante</th>
-        <th>Celular</th>
-        <th>Horas inicial</th>
-        <th>Horas final</th>
-        <th>Observación</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let Oferta of ofertas; let i = index">
-        <td>
-          <span *ngIf="indiceEdicion !== i">{{Oferta.nombre}}</span>
-          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].nombre">
-        </td>
-        <td>
-          <span *ngIf="indiceEdicion !== i">{{Oferta.ubicacion}}</span>
-          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].ubicacion">
-        </td>
-        <td>
-          <span *ngIf="indiceEdicion !== i">{{Oferta.nombreEstudiante}}</span>
-          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].nombreEstudiante">
-        </td>
-        <td>
-          <span *ngIf="indiceEdicion !== i">{{Oferta.celular}}</span>
-          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].celular">
-        </td>
-        <td>
-          <span *ngIf="indiceEdicion !== i">{{Oferta.horasInicial}}</span>
-          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].horasInicial">
-        </td>
-        <td>
-          <span *ngIf="indiceEdicion !== i">{{Oferta.horasFinal}}</span>
-          <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].horasFinal">
-        </td>
-        <td>
-          <span *ngIf="indiceEdicion !== i">{{Oferta.observacion}}</span>
-          <input *ngIf="indiceEdicion === i" type="number" [(ngModel)]="ofertas[i].observacion">
-        </td>
-        <td>
-          <button *ngIf="indiceEdicion !== i" (click)="editarOferta(i)">Editar</button>
-          <button *ngIf="indiceEdicion === i" (click)="guardarEdicion()">Guardar</button>
-          <button (click)="eliminarOferta(i)">Eliminar</button>
-        </td>
-      </tr>
-    </tbody>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Ubicación</th>
+      <th>Nombre del estudiante</th>
+      <th>Celular</th>
+      <th>Horas inicial</th>
+      <th>Horas final</th>
+      <th>Observación</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let oferta of ofertas; let i = index">
+      <td>
+        <span *ngIf="indiceEdicion !== i">{{ oferta.nombre }}</span>
+        <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].nombre">
+      </td>
+      <td>
+        <span *ngIf="indiceEdicion !== i">{{ oferta.ubicacion }}</span>
+        <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].ubicacion">
+      </td>
+      <td>
+        <span *ngIf="indiceEdicion !== i">{{ oferta.nombre_estudiante }}</span>
+        <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].nombre_estudiante">
+      </td>
+      <td>
+        <span *ngIf="indiceEdicion !== i">{{ oferta.celular }}</span>
+        <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].celular">
+      </td>
+      <td>
+        <span *ngIf="indiceEdicion !== i">{{ oferta.horas_inicial }}</span>
+        <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].horas_inicial">
+      </td>
+      <td>
+        <span *ngIf="indiceEdicion !== i">{{ oferta.horas_final }}</span>
+        <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].horas_final">
+      </td>
+      <td>
+        <span *ngIf="indiceEdicion !== i">{{ oferta.observaciones }}</span>
+        <input *ngIf="indiceEdicion === i" type="text" [(ngModel)]="ofertas[i].observaciones">
+      </td>
+      <td>
+        <button *ngIf="indiceEdicion !== i" (click)="editarOferta(i)">Editar</button>
+        <button *ngIf="indiceEdicion === i" (click)="guardarEdicion()">Guardar</button>
+        <button (click)="eliminarOferta(i)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
 </table>
